@@ -1,5 +1,7 @@
 require 'bunny'
 
+Signal.trap('INT') { exit }
+
 conn = Bunny.new(vhost: '/demo', user: 'demo', password: 'guest')
 conn.start
 
