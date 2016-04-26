@@ -1,0 +1,26 @@
+namespace :rabbitmq do
+  desc 'create vhost, user and exchange'
+  task :setup do
+    sh 'rabbitmqadmin declare user name=demo password=guest tags=administrator'
+
+    vhost = '/demo'
+    unless system("rabbitmqadmin list vhosts | grep -c #{vhost} > /dev/null")
+      sh "rabbitmqadmin declare vhost name=#{vhost}"
+    end
+    sh "rabbitmqadmin declare permission vhost=#{vhost} user=demo configure='.*' write='.*' read='.*'"
+    sh "rabbitmqadmin declare exchange name=demo.topic type=topic --vhost=#{vhost} --username=demo --password=guest"
+  end
+
+  desc 'burn it all down'
+  task :teardown do
+    vhost = '/demo'
+    if system("rabbitmqadmin list vhosts | grep #{vhost} > /dev/null")
+      sh "rabbitmqadmin delete vhost name=#{vhost}"
+    end
+    if system("rabbitmqadmin list users | grep demo > /dev/null")
+      sh "rabbitmqadmin delete user name=demo"
+    end
+  end
+end
+
+task reset: %w(rabbitmq:teardown rabbitmq:setup)
