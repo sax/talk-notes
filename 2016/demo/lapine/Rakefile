@@ -8,7 +8,7 @@ namespace :rabbitmq do
       sh "rabbitmqadmin declare vhost name=#{vhost}"
     end
     sh "rabbitmqadmin declare permission vhost=#{vhost} user=demo configure='.*' write='.*' read='.*'"
-    sh "rabbitmqadmin declare exchange name=rabbit.topic type=topic --vhost=#{vhost} --username=demo --password=guest"
+    sh "rabbitmqadmin declare exchange name=lapine.topic type=topic --vhost=#{vhost} --username=demo --password=guest"
   end
 
   desc 'burn it all down'

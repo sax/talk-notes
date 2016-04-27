@@ -1,0 +1,2 @@
+rabbitmq: rabbitmq-server
+redis: redis-server redis.conf

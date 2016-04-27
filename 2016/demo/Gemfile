@@ -1,8 +1,4 @@
 source 'https://rubygems.org'
 
-gem 'amqp'
-gem 'bunny'
 gem 'foreman'
-gem 'pry-nav'
 gem 'rake'
-gem 'sidekiq'

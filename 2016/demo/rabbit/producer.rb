@@ -7,7 +7,7 @@ conn.start
 
 channel = conn.create_channel
 
-exchange = Bunny::Exchange.new(channel, 'topic', 'demo.topic', durable: true)
+exchange = Bunny::Exchange.new(channel, 'topic', 'rabbit.topic', durable: true)
 
 while true
   message = "hello!"

@@ -1,0 +1,18 @@
+connection:
+  host: '127.0.0.1'
+  port: 5672
+  ssl: false
+  vhost: '/demo'
+  username: 'demo'
+  password: 'guest'
+
+topics:
+  - lapine.topic
+
+queues:
+  - q: lapinedemo.event
+    topic: lapine.topic
+    routing_key: thing.happened
+    handlers:
+      - MyWorker
+
